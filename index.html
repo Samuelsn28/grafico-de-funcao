@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+	<head>
+		<meta charset="UTF-8">
+		<title>Plano Cartesiano</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			html, body {
+				width: 100vw;
+				height: 100vh;
+			}
+			body {
+				height: auto;
+				overflow-x: hidden;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+			h1 {
+				margin: 1% 0;
+			}
+			form {
+				width: 30vw;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 5px;
+			}
+			form > section {
+				width: 95%;
+				display: flex;
+				justify-content: space-between;
+			}
+			form > button {
+				width: 100%;
+			}
+		</style>
+	</head>	
+	<body>
+		<h1>Gráfico de Função</h1>
+		<form name="especificacoes-form" method="GET" action="#" onsubmit="return false">
+			<section>
+				<label for="intervalo-menor-input">Intervalo menor</label>
+				<input type="number" id="intervalo-menor-input" name="intervalo-menor-input" required>
+			</section>
+			<section>
+				<label for="intervalo-maior-input">Intervalo maior</label>
+				<input type="number" id="intervalo-maior-input" name="intervalo-maior-input" required>
+			</section>
+			<section>
+				<label for="escala-input">Escala</label>
+				<input type="number" id="escala-input" name="escala-input" required>
+			</section>
+			<section>
+				<label for="taxa-variacao-input">Taxa de variação</label>
+				<input type="number" id="taxa-variacao-input" name="taxa-variacao-input" required>
+			</section>
+			<button id="enviar-button" onclick="geraNovoGrafico()">Enviar</button>
+		</form>	
+
+		<canvas id="plano" width="1200" height="600" />
+
+		<script type="text/javascript" src="./script.js"></script>
+		<script type="text/javascript" src="./script-principal.js"></script>
+	</body>
+</html>
+

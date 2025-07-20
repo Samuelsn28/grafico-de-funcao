@@ -1,10 +1,13 @@
+
 const plano = document.getElementById("plano");
 const context = plano.getContext("2d");
+const margemHorizontalEixoY = 50;
+const alturaEixoX = 400;
 
 var coordenadas = [];
 
-// Especificações
-const funcao = (x) => {
+// Especificações do gráfico
+var funcao = (x) => {
     if (x > 2) {
 	return 6 * Math.sin(x);
     }
@@ -13,8 +16,6 @@ const funcao = (x) => {
 var intervaloXDesejado = {xi: 0, xf: 30};
 var taxaVariacaoX = 1;
 var escala = 50;
-const margemHorizontalEixoY = 50;
-const alturaEixoX = 400;
 
 function desenhaEixos() {
 	// Eixo x
@@ -289,20 +290,17 @@ function criaGrafico(intervaloPedido, escalaPedida, taxaVariacaoPedida) {
 	escala = escalaPedida;
 	taxaVariacaoX = taxaVariacaoPedida;
 
-	context.reset();
-	coordenadas = [];
-
-	desenhaEixos();
+	limpaGrafico();
 	calculaCoordenadas();
 	desenhaPontos();
 	desenhaSegmentosDeRetas();
 }
 
-function inicio() {
-    desenhaEixos();
-    calculaCoordenadas();
-    desenhaPontos();
-    desenhaSegmentosDeRetas();
+function limpaGrafico() {
+	context.reset();
+	coordenadas = [];
+
+	desenhaEixos();
 }
 
-inicio();
+

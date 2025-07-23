@@ -8,10 +8,7 @@ var coordenadas = [];
 
 // Especificações do gráfico
 var funcao = (x) => {
-    if (x > 2) {
-	return 6 * Math.sin(x);
-    }
-    return x + 1
+    return 2 * x + 2;
 }
 var intervaloXDesejado = {xi: 0, xf: 30};
 var taxaVariacaoX = 1;

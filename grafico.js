@@ -8,7 +8,7 @@ var coordenadas = [];
 
 // Especificações do gráfico
 var funcao = (x) => {
-    return 2 * x + 2;
+    return Math.cos(x);
 }
 var intervaloXDesejado = {xi: 0, xf: 30};
 var taxaVariacaoX = 1;
@@ -67,7 +67,7 @@ function desenhaPontos() {
 		*/
 	}
 
-	for (let i = 0; i < (coordenadas.length - 1); i++) {
+	for (let i = 0; i < coordenadas.length; i++) {
 		desenhaUmPonto(
 			coordenadas[i].x,
 			coordenadas[i].y
@@ -75,22 +75,13 @@ function desenhaPontos() {
 	}
 }
 
-var contagem = intervaloXDesejado.xf * 10 + 1;
-
 function verificaSeEContinuo(pontoAnterior, pontoAtual) {
-	contagem--;
-
 	const casasDecimais = 5;
 
 	let valorXAlvo = pontoAtual.x;
 
 	let valorTendenciaDireita = funcao( (valorXAlvo + (1 / (10 ** casasDecimais))) );
 	let valorTendenciaEsquerda = funcao( (valorXAlvo - (1 / (10 ** casasDecimais))) );
-
-	console.log("++++++++++++++++++++++++++");
-	console.log(`Contagem: ${contagem}`);
-	console.log(valorTendenciaDireita);
-	console.log(valorTendenciaEsquerda);
 
 	function calculaQuantidadeCasasDecimaisDoAlvo(alvoX) {
 		let quantidadeCasas = 0;
@@ -109,17 +100,6 @@ function verificaSeEContinuo(pontoAnterior, pontoAtual) {
 	let tendenciaDireitaArredondado = parseFloat(valorTendenciaDireita.toFixed(casasDecimaisAlvo));
 	let tendenciaEsquerdaArredondado = parseFloat(valorTendenciaEsquerda.toFixed(casasDecimaisAlvo));
 
-	console.log("@@@@@");
-	console.log(`Direita arredondado: ${tendenciaDireitaArredondado}`);
-	console.log(`Esquerda arredondado: ${tendenciaEsquerdaArredondado}`);
-
-	console.log(";;;;;;;;;;;;;;;;;");
-	console.log(`Alvo: ${valorXAlvo}`);
-	console.log(`Valor y: ${pontoAtual.y}`);
-	console.log(`Casas decimais alvo: ${calculaQuantidadeCasasDecimaisDoAlvo(valorXAlvo)}`);
-
-	console.log("&&&&&&&&&&&&&&&&&&");
-
 	let maior = 0;
 	let menor = 0;
 
@@ -132,37 +112,25 @@ function verificaSeEContinuo(pontoAnterior, pontoAtual) {
 	}
 
 	if ( (menor < pontoAtual.y) && (pontoAtual.y < maior) ) {
-		console.log("Está dentro do intervalo");
+		
 	} else {
-		console.log("Negado");
 		return false;
 	}
-	console.log("&&&&&&&&&&&&&&&&&");
-
+	
 	return true;
 }
 
 function verificaSeEContinua(pontoAnterior, pontoAtual) {
 	const casasDecimais = 10;
 	
-	contagem++;
-
-	console.log("#######################");
-	console.log(contagem);
-	console.log("#######################");
-	
 	let valoresTendencia = [];
 
 	// Tendencia da esquerda para o ponto
-	console.log("--------------");
 
 	for (let i = 1; i <= casasDecimais; i++) {
 		let valorDescontar = 1 / (10 ** i);
 	
-		console.log(pontoAtual.x - valorDescontar);
 		let imagemObtida = funcao( (pontoAtual.x - valorDescontar) );
-		console.log(imagemObtida);
-		console.log("+++++++++++++");
 		valoresTendencia.push(imagemObtida);
 	}
 
@@ -172,13 +140,8 @@ function verificaSeEContinua(pontoAnterior, pontoAtual) {
 		valoresArredondado.push(parseFloat(valor.toFixed(2)));
 	});
 
-	console.log(valoresArredondado);
-	console.log(pontoAtual.y);
-
 	// Tendencia da direita para o ponto
 	
-	console.log("###############");
-
 	let valoresTendenciaDireita = [];
 
 	for (let j = 1; j <= casasDecimais; j++) {
@@ -186,25 +149,13 @@ function verificaSeEContinua(pontoAnterior, pontoAtual) {
 
 		let imagemObtida = funcao( pontoAtual.x + valorAcrescentar );
 		valoresTendenciaDireita.push(imagemObtida);
-
-		console.log(`Acréscimo:`);
-		console.log(valorAcrescentar);
-		console.log(`Imagem obtida:`);
-		console.log(imagemObtida);
 	}
-	console.log("--- Valores tendencia ---");
-	console.log(valoresTendenciaDireita);
-
+	
 	let valoresDireitaArredondados = []
 
 	valoresTendenciaDireita.forEach( (valor) => {
 		valoresDireitaArredondados.push(parseFloat(valor.toFixed(2)));
 	});
-
-	console.log("--- Valores arrendondados ---");
-	console.log(valoresDireitaArredondados);
-	console.log(`Ponto alvo:`);
-	console.log(pontoAtual.y);
 
 	// Se os dois arrays de valores arredondados forem diferentes, nao e continuo
 	
@@ -222,10 +173,6 @@ function verificaSeEContinua(pontoAnterior, pontoAtual) {
 
 	somaEsquerdaTotal = Math.round(somaEsquerdaTotal);
 	somaDireitaTotal = Math.round(somaDireitaTotal);
-
-	console.log("===============");
-	console.log(`Soma esquerda: ${somaEsquerdaTotal}`);
-	console.log(`Soma direita: ${somaDireitaTotal}`);
 
 	if (somaEsquerdaTotal != somaDireitaTotal) {
 		return false;
@@ -247,7 +194,7 @@ function desenhaSegmentosDeRetas() {
 		y: coordenadas[0].y
 	};
 
-	for (let i = 1; i < (coordenadas.length - 1); i++) {
+	for (let i = 1; i < coordenadas.length; i++) {
 		let pontoAtual = {
 			x: adaptaValorX(coordenadas[i].x), 
 			y: adaptaValorY(coordenadas[i].y)
@@ -278,8 +225,6 @@ function calculaCoordenadas() {
 			y: funcao(i)
 		});
 	}
-	coordenadas.reverse();
-	console.log(coordenadas);
 }
 
 function criaGrafico(intervaloPedido, escalaPedida, taxaVariacaoPedida) {

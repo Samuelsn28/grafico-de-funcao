@@ -1,8 +1,9 @@
 
 const plano = document.getElementById("plano");
 const context = plano.getContext("2d");
-const margemHorizontalEixoY = 50;
-const alturaEixoX = 400;
+const valorEixoMovimentacao = 50;
+var margemHorizontalEixoY = 50;
+var alturaEixoX = 400;
 
 var coordenadas = [];
 
@@ -37,7 +38,7 @@ function adaptaValorY(y) {
 function desenhaPontos() {
 
 	function desenhaUmPonto(x, y) {
-		const raio = 0.05;
+		const raio = 0.05 * (escala / 5);
 		const corPonto = "black";
 
 		x = adaptaValorX(x);
@@ -225,6 +226,39 @@ function calculaCoordenadas() {
 			y: funcao(i)
 		});
 	}
+}
+
+function movimentaEixoYParaOeste() {
+	margemHorizontalEixoY -= valorEixoMovimentacao;
+	renderizaGrafico();
+}
+
+function movimentaEixoYParaLeste() {
+	margemHorizontalEixoY += valorEixoMovimentacao;
+	renderizaGrafico();
+}
+
+function movimentaEixoXParaNorte() {
+	alturaEixoX -= valorEixoMovimentacao;
+	renderizaGrafico();
+}
+
+function movimentaEixoXParaSul() {
+	alturaEixoX += valorEixoMovimentacao;
+	renderizaGrafico();
+}
+
+function resetaEixosPosicoes() {
+	margemHorizontalEixoY = 50;
+	alturaEixoX = 400;
+}
+
+function renderizaGrafico() {
+	context.reset();
+
+	desenhaEixos();
+	desenhaPontos();
+	desenhaSegmentosDeRetas();
 }
 
 function criaGrafico(intervaloPedido, escalaPedida, taxaVariacaoPedida) {

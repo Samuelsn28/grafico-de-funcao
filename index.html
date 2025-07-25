@@ -5,49 +5,8 @@
 		<meta charset="UTF-8">
 		<title>Gráfico de Funções</title>
 		<link rel="icon" href="assets/img/icon.ico">
-		<style>
-			* {
-				margin: 0;
-				padding: 0;
-				box-sizing: border-box;
-			}
-			html, body {
-				width: 100vw;
-				height: 100vh;
-			}
-			body {
-				height: auto;
-				overflow-x: hidden;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-			}
-			h1 {
-				margin: 1% 0;
-			}
-			form {
-				width: 30vw;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				gap: 5px;
-			}
-			form > section {
-				width: 95%;
-				display: flex;
-				justify-content: space-between;
-			}
-			form > button {
-				width: 100%;
-			}
-			canvas {
-				margin: 2vh 0;
-				border: black 3px solid;
-				border-radius: 20px;
-				box-shadow: 0px 5px 10px;
-			}
-		</style>
+		<link rel="stylesheet" href="estilos/padrao.css">
+		<link rel="stylesheet" href="estilos/index.css">
 	</head>	
 	<body>
 		<h1>Gráfico de Função</h1>
@@ -71,28 +30,49 @@
 			<button id="enviar-button" onclick="geraNovoGrafico()">Gerar</button>
 		</form>	
 
-		<canvas id="plano" width="1200" height="600" />
-
-		<section id="container-botoes-movimentacao">
+    <section id="grafico-container">
+        <section id="container-botoes-movimentacao">
 			<section>
-				<button></button>
-				<button>T</button>
-				<button></button>
+				<button id="botao-movimentacao-no" class="botoes-movimentacao">
+					&#x2196
+				</button>
+				<button id="botao-movimentacao-n" class="botoes-movimentacao">
+					&#x2191
+				</button>
+				<button id="botao-movimentacao-ne" class="botoes-movimentacao">
+					&#x2197
+				</button>
 			</section>
 			<section>
-				<button>E</button>
-				<section>M</section>
-				<button>D</button>
+				<button id="botao-movimentacao-o" class="botoes-movimentacao">
+					&#x2190
+				</button>
+				<button class="botoes-movimentacao">
+					R
+				</button>
+				<button id="botao-movimentacao-l" class="botoes-movimentacao">
+					&#x2192
+				</button>
 			</section>
 			<section>
-				<button></button>
-				<button>B</button>
-				<button></button>
+				<button id="botao-movimentacao-so" class="botoes-movimentacao">
+					&#x2199
+				</button>
+				<button id="botao-movimentacao-s" class="botoes-movimentacao">
+					&#x2193
+				</button>
+				<button id="botao-movimentacao-se" class="botoes-movimentacao">
+					&#x2198
+				</button>
 			</section>
 		</section>
+		   
+      	<canvas id="plano" width="1200" height="600"></canvas>
+    </section>
 
 		<script type="text/javascript" src="./grafico.js"></script>
 		<script type="text/javascript" src="./script.js"></script>
+		<script type="text/javascript" src="./botoes-movimentacao.js"></script>
 	</body>
 </html>
 
